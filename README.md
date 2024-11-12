@@ -19,23 +19,35 @@ The dataset contains 25,000 images of cats and dogs, with 12,499 images for each
 `train_datagen`: Rescales images and applies random transformations for data augmentation.<br>
 `validation_datagen`: Only rescales images. Both generators load and preprocess the images in batches of 32, resizing them to 224x224 pixels.
 
+![Original Images](./graphs/original_images.png)
+![Resized Images](./graphs/resized_images.png)
+
 ## Model Implementation & Evaluation
 
 ### TensorFlow.Keras Base Model:
 **Model Architecture**:
-The base model consists of two convolutional layers followed by pooling layers to extract hierarchical features. The output is flattened and passed through dense layers with a sigmoid activation function for binary classification.<br>
+The base model consists of two convolutional layers followed by pooling layers to extract hierarchical features. The output is flattened and passed through dense layers with a sigmoid activation function for binary classification. There are a total of **5,977,185 trainable parameters** that are updated during the training process.<br>
+
+![Tensorflow Model Summary](./graphs/model_tensorflow_summary.png)
+
 **Training & Evaluation**:
 The model is trained for 10 epochs using the Adam optimizer with a learning rate of 0.001 and binary cross-entropy loss.
 After training, the model achieved a validation accuracy of 87.50%. However, the fluctuating training history suggested potential instability and overfitting.<br>
 **Run time**: 17 minutes.
 
+![TensorFlow.Keras Loss/Accuracy Curves](./graphs/tensorflow_keras_curves.png)
+
 ### Transfer Learning using InceptionV3:
 **Model Architecture**:
-The InceptionV3 model is pre-trained on ImageNet and fine-tuned for this binary classification task. The early layers are frozen, and custom layers are added for the final classification.<br>
+The InceptionV3 model is pre-trained on ImageNet and has been fine-tuned for this binary classification task. The initial layers are frozen to retain the learned features, and custom layers are added for the final classification stage. The model has a total of 21,804,833 parameters, and only 2,049 are trainable due to the transfer learning setup. The pre-trained model weights can be found at the following link:  [InceptionV3 Weights](https://storage.googleapis.com/tensorflow/keras-applications/inception_v3/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5)<br>
+
+![Tensorflow Model Summary](./graphs/model_inception_summary.png)
+
 **Training & Evaluation**:
 * The InceptionV3 model was trained using the Adam optimizer, binary cross-entropy loss, and accuracy as the evaluation metric.
 * The model achieved a validation accuracy of **99.08%** after 9 epochs, which is a significant improvement over the base model.<br>
 **Run time**: 25 minutes 14 seconds.
+![Inception Loss/Accuracy Curves](./graphs/inception_curves.png)
 
 ## Conclusion
 
@@ -44,6 +56,8 @@ The InceptionV3 model is pre-trained on ImageNet and fine-tuned for this binary 
 
 **InceptionV3 Model**:
 * Demonstrates superior performance, suggesting that the pre-trained model generalizes well to this classification task. The current model appears to be well-optimized.
+
+![Model Comparison Curves](./graphs/model_comparison.png)
 
 ### Future Recommendations:
 **For the TensorFlow Base Model**:
