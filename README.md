@@ -39,7 +39,7 @@ After training, the model achieved a validation accuracy of 87.50%. However, the
 
 ### Transfer Learning using InceptionV3:
 **Model Architecture**:
-The InceptionV3 model is pre-trained on ImageNet and has been fine-tuned for this binary classification task. The initial layers are frozen to retain the learned features, and custom layers are added for the final classification stage. The model has a total of 21,804,833 parameters, and only 2,049 are trainable due to the transfer learning setup. The pre-trained model weights can be found at the following link:  [InceptionV3 Weights](https://storage.googleapis.com/tensorflow/keras-applications/inception_v3/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5)<br>
+The InceptionV3 model is pre-trained on ImageNet and has been fine-tuned for this binary classification task. The initial layers are frozen to retain the learned features, and custom layers are added for the final classification stage. The model has a total of 21,804,833 parameters, and only 2,049 are trainable due to the transfer learning setup. The InceptionV3 model weights can be found in `cat_dog_classification.ipynb` in this repository.
 
 ![Tensorflow Model Summary](./graphs/model_inception_summary.png)
 
